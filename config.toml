@@ -1,0 +1,26 @@
+# Change to your real domain once you buy it.
+base_url = "https://example.com"
+title = "starfovo"
+description = "Notes on tech."
+default_language = "en"
+
+compile_sass = false
+build_search_index = false
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
+taxonomies = [
+  { name = "tags", feed = true },
+]
+
+[markdown]
+smart_punctuation = true
+
+
+[markdown.highlighting]
+style = "class"
+light_theme = "github-light"
+dark_theme = "github-dark"
+
+[extra]
+author = "Marek Feifrlik"
