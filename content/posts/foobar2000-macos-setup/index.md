@@ -29,7 +29,7 @@ You'll set up five components from the [fb2k-components-mac-suite](https://githu
 
 Download the latest stable version (2.26 at the time of writing) from [foobar2000.org/mac](https://www.foobar2000.org/mac). Open the `.dmg` and drag foobar2000 into Applications.
 
-foobar2000 itself runs on macOS 11 Big Sur or newer, on Intel and Apple Silicon. **The components need macOS 12 Monterey or newer.**
+foobar2000 itself runs on macOS 11 Big Sur or newer, on Intel and Apple Silicon. **The components need macOS 12 Monterey or newer**, so that's the minimum for this guide (and what the video shows).
 
 ## 2. The layout editor *(0:17)*
 
