@@ -26,14 +26,35 @@
 html { font-size: 112.5%; }
 
 body {
-  margin: 0 auto;
-  max-width: 40rem;
-  padding: 1.5rem 1rem 3rem;
+  margin: 0;
+  padding: 1.5rem 0 3rem;
   background: var(--bg);
   color: var(--fg);
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.6;
 }
+
+/* Layout: text sits in a readable column; videos, images and code
+   blocks break out into a wider one. Gutters shrink to 1rem on phones. */
+.flow {
+  --content: 46rem;
+  --wide: 64rem;
+  --extra: calc((var(--wide) - var(--content)) / 2);
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(1rem, 1fr)
+    [wide-start] minmax(0, var(--extra))
+    [content-start] min(var(--content), 100% - 2rem)
+    [content-end] minmax(0, var(--extra))
+    [wide-end] minmax(1rem, 1fr)
+    [full-end];
+}
+.flow > * { grid-column: content; min-width: 0; }
+/* Grid items don't collapse margins, so keep only the top ones. */
+:where(.flow) > * { margin-block-end: 0; }
+.flow > :is(main, article) { grid-column: full; }
+.flow > :is(pre, video, figure),
+.flow > p:has(> img:only-child) { grid-column: wide; }
 
 a { color: var(--link); }
 a:visited { color: var(--link-visited); }
@@ -74,7 +95,7 @@ h1 { font-size: 1.75rem; margin: 0 0 0.5rem; }
 }
 
 img, video { max-width: 100%; height: auto; }
-video { display: block; margin: 1.5rem 0; background: #000; }
+video { display: block; width: 100%; margin-top: 1em; background: #000; }
 
 code {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
