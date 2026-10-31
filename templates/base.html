@@ -1,7 +1,8 @@
 <!doctype html>
 {#- Copy of zola-quiet's base.html (theme commit 54c7f29). Changes: the
-    terminal (TUI) skin is the default, and a <noscript> fallback loads it
-    when JavaScript is off. -#}
+    terminal (TUI) skin is the default, a <noscript> fallback loads it
+    when JavaScript is off, the sidebar always renders (no ASCII box), and
+    a masthead with the site title sits above the content (site.css). -#}
 <html lang="{{ config.default_language }}">
 <head>
 <meta charset="utf-8">
@@ -41,6 +42,7 @@ var STYLE_TUI = '{{ get_url(path="style-tui.css") }}';
 })();
 </script>
 <noscript><link rel="stylesheet" href="{{ get_url(path='style-tui.css') }}"></noscript>
+<link rel="stylesheet" href="{{ get_url(path='site.css', cachebust=true) }}">
 <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml') }}">
 <meta name="color-scheme" content="light dark">
 {# Syntax-highlight CSS, paired with the light/dark theme. Default to
@@ -70,16 +72,16 @@ var STYLE_TUI = '{{ get_url(path="style-tui.css") }}';
 </div>
 <div class="layout{% block layout_class %}{% endblock %}">
 {% block sidebar %}
-{% if config.extra.ascii_signature %}
+{#- Always render the sidebar so the content column lines up on every
+    page; posts fill it with the on-page TOC. -#}
 <aside class="sidebar">
-<pre class="ascii" aria-hidden="true">
-{{ config.extra.ascii_signature }}
-</pre>
 {% block sidebar_extras %}{% endblock %}
 </aside>
-{% endif %}
 {% endblock %}
 <div class="content">
+<header class="masthead">
+<a href="{{ get_url(path='') }}"><span class="prompt" aria-hidden="true">❯</span> {{ config.title }}<span class="cursor" aria-hidden="true">_</span></a>
+</header>
 <main>
 {% block content %}{% endblock %}
 </main>

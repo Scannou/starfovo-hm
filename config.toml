@@ -26,10 +26,3 @@ dark_theme = "github-dark"
 [extra]
 author = "Marek F. (Starf, Scannt)"
 github = "Scannou"
-ascii_signature = """
-╭─────────────────────╮
-│                     │
-│   ❯  starfovo.hm _  │
-│                     │
-╰─────────────────────╯
-"""
