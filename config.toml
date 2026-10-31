@@ -1,6 +1,6 @@
 # Change to your real domain once you buy it.
 base_url = "https://example.com"
-title = "starfovo"
+title = "starfovo.hm"
 description = "Notes on tech."
 default_language = "en"
 
@@ -23,4 +23,4 @@ light_theme = "github-light"
 dark_theme = "github-dark"
 
 [extra]
-author = "Marek Feifrlik"
+author = "Marek F. (Starf, Scannt)"
