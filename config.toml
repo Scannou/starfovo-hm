@@ -1,5 +1,5 @@
-# Change to your real domain once you buy it.
-base_url = "https://example.com"
+# Live URL. The deploy workflow overrides it with whatever GitHub Pages reports.
+base_url = "https://scannou.github.io/starfovo-hm"
 title = "starfovo.hm"
 description = "Notes on tech."
 default_language = "en"
