@@ -73,7 +73,8 @@ h1 { font-size: 1.75rem; margin: 0 0 0.5rem; }
   font-size: 0.9rem;
 }
 
-img { max-width: 100%; height: auto; }
+img, video { max-width: 100%; height: auto; }
+video { display: block; margin: 1.5rem 0; background: #000; }
 
 code {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
