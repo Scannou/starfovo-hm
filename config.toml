@@ -3,6 +3,7 @@ base_url = "https://scannou.github.io/starfovo-hm"
 title = "starfovo.hm"
 description = "Notes on tech."
 default_language = "en"
+theme = "zola-quiet"
 
 compile_sass = false
 build_search_index = false
@@ -24,3 +25,11 @@ dark_theme = "github-dark"
 
 [extra]
 author = "Marek F. (Starf, Scannt)"
+github = "Scannou"
+ascii_signature = """
+╭─────────────────────╮
+│                     │
+│   ❯  starfovo.hm _  │
+│                     │
+╰─────────────────────╯
+"""
