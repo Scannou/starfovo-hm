@@ -66,13 +66,7 @@ Double-clicking a `.fb2k-component` file doesn't install it, and neither does co
 
 ## 4. SimPlaylist *(0:35)*
 
-Replace the stock playlist view in your layout with:
-
-```
-simplaylist
-```
-
-Click **Apply**, and you get:
+Replace the stock playlist view in your layout with `simplaylist`. Click **Apply**, and you get:
 
 - tracks grouped by album, with the cover art next to each group
 - the columns you choose
@@ -163,5 +157,7 @@ From top to bottom: waveform seekbar, spectrum, then SimPlaylist with a Queue / 
 The suite has more than these five. **Playlist Organizer** gives you folders for your playlists, **Album Art (Extended)** shows back covers and disc art, and **Effects DSP** adds echo, reverb, pitch shift and more. You'll find them all in the [repo](https://github.com/JendaT/fb2k-components-mac-suite).
 
 Found a bug or missing a component you loved on Windows? [Open an issue](https://github.com/JendaT/fb2k-components-mac-suite/issues).
+
+&nbsp;
 
 *Music in the video: Repulsive Force – Everything can levitate.*
