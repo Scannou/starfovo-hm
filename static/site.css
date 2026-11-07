@@ -23,3 +23,10 @@
   opacity: 0.3;
 }
 .egg-trigger:hover, .egg-trigger:focus-visible { opacity: 1; }
+
+/* Use more of wide screens: a wider text column (the theme caps it at
+   88ch), and larger text on big displays. Phones keep the theme's 16px. */
+.layout { max-width: calc(110ch + 24ch + 2ch); }
+main { max-width: 110ch; }
+@media (min-width: 1400px) { body { font-size: 15px; } }
+@media (min-width: 1800px) { body { font-size: 16px; } }
