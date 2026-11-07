@@ -14,3 +14,15 @@
 
 /* The typographic skin has no sidebar, so drop the empty one. */
 :root:not([data-skin="tui"]) .sidebar:not(:has(*)) { display: none; }
+
+/* Footer trigger for the easter egg (static/destroy.js). */
+.egg-trigger {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0 0.25em;
+  cursor: pointer;
+  opacity: 0.3;
+}
+.egg-trigger:hover, .egg-trigger:focus-visible { opacity: 1; }

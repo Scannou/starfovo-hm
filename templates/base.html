@@ -2,7 +2,8 @@
 {#- Copy of zola-quiet's base.html (theme commit 54c7f29). Changes: the
     terminal (TUI) skin is the default, a <noscript> fallback loads it
     when JavaScript is off, the sidebar always renders (no ASCII box), and
-    a masthead with the site title sits above the content (site.css). -#}
+    a masthead with the site title sits above the content (site.css), and
+    an easter egg loader plus its footer trigger (static/destroy.js). -#}
 <html lang="{{ config.default_language }}">
 <head>
 <meta charset="utf-8">
@@ -86,7 +87,7 @@ var STYLE_TUI = '{{ get_url(path="style-tui.css") }}';
 {% block content %}{% endblock %}
 </main>
 <footer class="site-footer" role="contentinfo">
-<p class="footer-line"># © {{ now() | date(format="%Y") }} {{ config.extra.author | default(value=config.title) }}</p>
+<p class="footer-line"># © {{ now() | date(format="%Y") }} {{ config.extra.author | default(value=config.title) }} <button class="egg-trigger" type="button" aria-label="Start the easter egg" title="☺">☺</button></p>
 <p class="footer-icons">
 {% if config.extra.github %}<a href="https://github.com/{{ config.extra.github }}" rel="noopener me" aria-label="GitHub" title="GitHub">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
@@ -188,6 +189,31 @@ syncSyntaxTheme();
       ticking = true;
     }
   }, { passive: true });
+})();
+
+/* Easter egg: typing "boom" or clicking the ☺ in the footer loads
+   static/destroy.js, a stick figure that shoots the page apart. */
+(function(){
+  var SRC = '{{ get_url(path="destroy.js", cachebust=true) }}';
+  var loading = false, typed = '';
+  function start(){
+    if (window.__destroy) { window.__destroy.start(); return; }
+    if (loading) return;
+    loading = true;
+    var s = document.createElement('script');
+    s.src = SRC;
+    s.onerror = function(){ loading = false; };
+    document.body.appendChild(s);
+  }
+  document.addEventListener('keydown', function(e){
+    if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
+    var t = e.target;
+    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
+    typed = (typed + e.key.toLowerCase()).slice(-4);
+    if (typed === 'boom') { typed = ''; start(); }
+  });
+  var btn = document.querySelector('.egg-trigger');
+  if (btn) btn.addEventListener('click', start);
 })();
 </script>
 </body>

@@ -51,6 +51,7 @@ Posts with `##` headings get an "on this page" list in the sidebar.
 | `content/` | Home intro (`_index.md`), about page, and posts |
 | `templates/base.html` | Copy of the theme's base template with site changes (see below) |
 | `static/site.css` | Site styles loaded after the theme's stylesheet |
+| `static/destroy.js` | Easter egg, loaded only when triggered (see below) |
 | `themes/zola-quiet/` | The theme, as a git submodule |
 | `.github/workflows/deploy.yml` | Builds and deploys to GitHub Pages |
 
@@ -62,6 +63,7 @@ theme's copy. That override:
 - makes the terminal (TUI) skin the default, with a `<noscript>` fallback
 - always renders the sidebar, without the ASCII signature box
 - adds the `❯ starfovo.hm` title above the content, styled in `static/site.css`
+- adds the easter egg loader and the ☺ trigger in the footer
 
 Because of the override, changes to the theme's own `base.html` don't apply
 automatically. The file's header comment names the theme commit it was copied
@@ -75,6 +77,15 @@ diff themes/zola-quiet/templates/base.html templates/base.html   # port any chan
 zola serve                                                       # check it
 git add themes/zola-quiet templates/base.html
 ```
+
+## Easter egg
+
+Type `boom` on any page, or click the faint ☺ in the footer, to load
+`static/destroy.js`. A stick figure appears and shoots the page apart:
+
+- ←/→ or A/D to run, ↑ or W to jump, the mouse to aim, click (hold) or Space to shoot
+- on touch screens, tap to shoot (the figure doesn't move)
+- Esc or the `[x]` box quits and restores the page; nothing is saved
 
 ## Deploy
 
