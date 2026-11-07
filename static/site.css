@@ -11,12 +11,6 @@
 }
 .masthead a:hover { background: transparent; color: var(--accent, var(--fg)); }
 .masthead .prompt { color: var(--accent, currentColor); margin-right: 0.15em; }
-.masthead .cursor { color: var(--accent, currentColor); animation: blink 1.1s steps(1) infinite; }
-
-@keyframes blink { 50% { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) {
-  .masthead .cursor { animation: none; }
-}
 
 /* The typographic skin has no sidebar, so drop the empty one. */
 :root:not([data-skin="tui"]) .sidebar:not(:has(*)) { display: none; }

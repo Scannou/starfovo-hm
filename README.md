@@ -61,7 +61,7 @@ theme's copy. That override:
 
 - makes the terminal (TUI) skin the default, with a `<noscript>` fallback
 - always renders the sidebar, without the ASCII signature box
-- adds the `❯ starfovo.hm_` title above the content, styled in `static/site.css`
+- adds the `❯ starfovo.hm` title above the content, styled in `static/site.css`
 
 Because of the override, changes to the theme's own `base.html` don't apply
 automatically. The file's header comment names the theme commit it was copied
