@@ -1,6 +1,7 @@
 +++
 title = "foobar2000 on macOS: from the bare window to a proper setup"
 date = 2026-10-31
+updated = 2026-11-07
 description = "A beginner's guide to foobar2000 on macOS: the layout editor, installing components, and five that make it feel like home."
 [taxonomies]
 tags = ["foobar2000", "macos", "audio"]
@@ -8,7 +9,7 @@ tags = ["foobar2000", "macos", "audio"]
 
 foobar2000 on macOS is a great player, but out of the box it's a bare window with a plain track list. The Windows version has decades of components and tutorials. The Mac version has neither the tutorials nor most of the components.
 
-This post (and the video below, under 3 minutes) takes you from a fresh install to this:
+This post (and the two-minute video below) takes you from a fresh install to this:
 
 <video controls preload="metadata" playsinline width="1920" height="1080" poster="fb2k-macos-tutorial-poster.jpg">
   <source src="fb2k-macos-tutorial.mp4" type="video/mp4">
@@ -25,17 +26,17 @@ You'll set up five components from the [fb2k-components-mac-suite](https://githu
 
 > Fair warning: the components are a work in progress. They're tested daily, but things can still break.
 
-## 1. Install foobar2000 *(0:07)*
+## 1. Install foobar2000 *(0:05)*
 
-Download the latest stable version (2.26 at the time of writing) from [foobar2000.org/mac](https://www.foobar2000.org/mac). Open the `.dmg` and drag foobar2000 into Applications.
+Download the latest stable version (2.26.2 at the time of writing) from [foobar2000.org/mac](https://www.foobar2000.org/mac). Open the `.dmg` and drag foobar2000 into Applications.
 
-foobar2000 itself runs on macOS 11 Big Sur or newer, on Intel and Apple Silicon. **The components need macOS 12 Monterey or newer**, so that's the minimum for this guide (and what the video shows).
+You'll need **macOS 12 Monterey or newer**, on Intel or Apple Silicon.
 
-## 2. The layout editor *(0:17)*
+## 2. The layout editor *(0:12)*
 
 This is the part most newcomers never find. foobar2000's window isn't fixed: it's built from **UI elements** described in a short text file.
 
-Open it from the macOS menu bar: **View → Layout → Edit Layout**.
+Open it from the macOS menu bar: **View → Layout → Edit Layout…**. There's no drag-and-drop or right-click editing: you type element names into the text and click **Apply**.
 
 A fresh layout looks roughly like this:
 
@@ -55,15 +56,15 @@ The rules are simple:
 
 Copy your current layout somewhere before experimenting, so you can always paste it back.
 
-## 3. Install the components *(0:37)*
+## 3. Install the components *(0:26)*
 
 1. Download the `.fb2k-component` files from the repo's [Releases page](https://github.com/JendaT/fb2k-components-mac-suite/releases).
-2. Open **Preferences → Components** and add the downloaded files.
-3. Restart foobar2000.
+2. Open **Preferences** (⌘,) **→ Components**, click **+** and choose the downloaded files.
+3. Restart foobar2000 when it asks.
 
-That's it. The new elements are now available in the layout editor.
+Double-clicking a `.fb2k-component` file doesn't install it, and neither does copying it into the components folder. After the restart, the new elements are available by name in the layout editor.
 
-## 4. SimPlaylist *(0:49)*
+## 4. SimPlaylist *(0:35)*
 
 Replace the stock playlist view in your layout with:
 
@@ -71,7 +72,7 @@ Replace the stock playlist view in your layout with:
 simplaylist
 ```
 
-You get:
+Click **Apply**, and you get:
 
 - tracks grouped by album, with the cover art next to each group
 - the columns you choose
@@ -79,7 +80,7 @@ You get:
 
 Change grouping and columns in **Preferences → Display → SimPlaylist**.
 
-## 5. Waveform Seekbar *(1:11)*
+## 5. Waveform Seekbar *(0:50)*
 
 Add `waveform-seekbar` at the top of the layout. It draws the entire track, not just what's playing right now, so you can see the quiet intro, the build-up and the drop at a glance. **Click anywhere to jump there.**
 
@@ -92,7 +93,7 @@ All styling is in **Preferences → Display → Waveform Seekbar**:
 
 Each track is analysed once and cached, so it loads instantly the next time.
 
-## 6. Spectrum Analyzer *(1:29)*
+## 6. Spectrum Analyzer *(1:04)*
 
 Add `spectrum` right under the seekbar. It reads foobar2000's own FFT stream and shows how loud each frequency is, live.
 
@@ -107,7 +108,7 @@ Two handy tricks inside the panel itself:
 - **Click and hold** to read the exact frequency under the cursor.
 - **Double-click** to go full-screen.
 
-## 7. Queue Manager *(1:51)*
+## 7. Queue Manager *(1:20)*
 
 Windows foobar2000 always had a visible queue. Now the Mac has one too. Put it next to SimPlaylist:
 
@@ -116,28 +117,32 @@ splitter vertical style=thin
   simplaylist
   tabs
     queue_manager tab-name="Queue"
-    albumart tab-name="Now Playing"
+    selection-properties tab-name="Now Playing"
 ```
+
+`selection-properties` is foobar2000's built-in track info panel, so the second tab shows details of the selected track.
 
 How to use it:
 
-- **Drag tracks** from SimPlaylist into the queue, and drag within it to reorder.
-- **Double-click or Enter** plays a track; **Delete** removes it.
-- The queue **survives a restart**.
+- **Add tracks** by selecting them in SimPlaylist and pressing **Q**, or with right-click → **Playback → Add to playback queue**.
+- **Drag** within the queue to reorder.
+- **Enter** plays a track; **Delete** removes it.
+- The queue **comes back after a restart** (you can turn that off in **Preferences → Display → Queue Manager**).
 - **Stop After Queue** stops playback once the queue runs out. It's in the Playback menu, the queue's right-click menu and Preferences.
 
-## 8. Last.fm Scrobbler *(2:09)*
+## 8. Last.fm Scrobbler *(1:34)*
 
-This one has no panel. Open **Preferences → Tools → Last.fm Scrobbler** and sign in. Authorisation happens in your browser, so foobar2000 never sees your password.
+Open **Preferences → Tools → Last.fm Scrobbler** and sign in. Authorisation happens in your browser, so foobar2000 never sees your password.
 
 - A track is scrobbled after **50% of it or 4 minutes**, whichever comes first.
 - **Now Playing** updates show your profile what's playing right now.
 - Offline? Scrobbles wait in a queue and are sent automatically later.
 - Options: scrobble only tracks in your Media Library, and whether streams like radio count.
+- Optional: add `lastfm_scrobbler` to your layout for a stats panel with your top artists, albums and tracks, recent plays and listening streak.
 
-## 9. The whole layout *(2:26)*
+## 9. The whole layout *(1:46)*
 
-Here's the full layout from the video. Paste it into **View → Layout → Edit Layout**:
+Here's the full layout from the video. Paste it into **View → Layout → Edit Layout…** and click **Apply**:
 
 ```
 splitter horizontal style=thin
@@ -147,7 +152,7 @@ splitter horizontal style=thin
     simplaylist
     tabs
       queue_manager tab-name="Queue"
-      albumart tab-name="Now Playing"
+      selection-properties tab-name="Now Playing"
   playback-controls
 ```
 
@@ -158,3 +163,5 @@ From top to bottom: waveform seekbar, spectrum, then SimPlaylist with a Queue / 
 The suite has more than these five. **Playlist Organizer** gives you folders for your playlists, **Album Art (Extended)** shows back covers and disc art, and **Effects DSP** adds echo, reverb, pitch shift and more. You'll find them all in the [repo](https://github.com/JendaT/fb2k-components-mac-suite).
 
 Found a bug or missing a component you loved on Windows? [Open an issue](https://github.com/JendaT/fb2k-components-mac-suite/issues).
+
+*Music in the video: Repulsive Force – Everything can levitate.*
