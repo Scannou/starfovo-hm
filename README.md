@@ -83,7 +83,10 @@ git add themes/zola-quiet templates/base.html
 Type `boom` on any page, or click the faint ☺ in the footer, to load
 `static/destroy.js`. A stick figure appears and shoots the page apart:
 
-- ←/→ or A/D to run, ↑ or W to jump, the mouse to aim, click (hold) or Space to shoot
+- ←/→ or A/D to run, ↑ or W to jump, ↓ or S to drop down, the mouse to aim,
+  click (hold) or Space to shoot
+- the figure can stand on words, images and other elements, jump up through
+  them, and falls when the one under it is shot
 - on touch screens, tap to shoot (the figure doesn't move)
 - Esc or the `[x]` box quits and restores the page; nothing is saved
 

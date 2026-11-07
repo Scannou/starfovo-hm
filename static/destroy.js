@@ -4,15 +4,21 @@
    when someone types "boom" or taps the ☺ in the footer. Nothing is
    saved: Esc, the [x] button or a reload brings the page back.
 
-   Controls: ←/→ or A/D run, ↑ or W jump, the mouse aims, click (hold)
-   or Space shoots. On touch screens, tap to shoot.
+   Controls: ←/→ or A/D run, ↑ or W jump, ↓ or S drop down, the mouse
+   aims, click (hold) or Space shoots. On touch screens, tap to shoot.
 
    How it works: every word on the page is wrapped in a <span> once.
    Bullets are tested against the page with elementFromPoint (the
    canvas overlay has pointer-events: none, so it's skipped). A hit
    element is hidden with visibility: hidden, which keeps the layout
    from shifting, and its letters or image pieces fly off as particles
-   drawn on the canvas. */
+   drawn on the canvas.
+
+   The tops of words, images and other targets are one-way platforms,
+   like in classic platformers: the figure lands on them when falling,
+   jumps up through them, and falls once the one under it is shot. It
+   lives in viewport coordinates but moves with the page on scroll, and
+   the top and bottom of the viewport act as ceiling and floor. */
 (function () {
   'use strict';
   if (window.__destroy) { window.__destroy.start(); return; }
@@ -24,6 +30,10 @@
   var FIRE_EVERY = 0.11;     // s between shots while holding
   var GRAVITY = 2200;
   var RUN_ACCEL = 2600, RUN_MAX = 320, RUN_FRICTION = 2200, JUMP = 780;
+  var FALL_MAX = 1400;
+  var FIGURE_H = 62;   // feet to top of head
+  var FOOT = 6;        // half-width of the feet for standing on things
+  var STEP = 6;        // how far up it steps onto a slightly higher word
   var MAX_PARTICLES = 2500;
 
   var active = false, wrapped = false, raf = 0, last = 0;
@@ -32,7 +42,7 @@
   var colors = {}, colorTimer = 0, hintTimer = 0;
   var player, aim, keys, firing, cooldown, flash, count;
   var bullets = [], particles = [], dead = [], hud = { x: 0, y: 0, w: 0, h: 0 };
-  var touchStart = null, posters = {};
+  var touchStart = null, posters = {}, solids = [], lastScroll = 0;
 
   function rand(a, b) { return a + Math.random() * (b - a); }
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
@@ -222,8 +232,33 @@
     }
   }
 
+  // Highest platform top the feet crossed while moving from prev to y.
+  function landing(prev, y, tol) {
+    var x1 = player.x - FOOT, x2 = player.x + FOOT, best = null;
+    for (var i = 0; i < solids.length; i++) {
+      var el = solids[i];
+      if (el.__eggDead) continue;
+      // One box per line, so a word that wraps (e.g. "drag-and-drop")
+      // doesn't become one big box spanning both lines.
+      var rects = el.getClientRects();
+      for (var j = 0; j < rects.length; j++) {
+        var r = rects[j];
+        if (r.top < prev - tol || r.top > y || r.right < x1 || r.left > x2) continue;
+        if (r.width < 1 || r.height < 1 || r.top <= player.dropBelow) continue;
+        if (best === null || r.top < best) best = r.top;
+      }
+    }
+    return best;
+  }
+
   function updatePlayer(dt) {
     var p = player;
+    // Move with the page when it scrolls, as if standing on it.
+    var d = scrollY - lastScroll;
+    lastScroll = scrollY;
+    p.y -= d;
+    p.dropBelow -= d;
+
     var dir = (keys.right ? 1 : 0) - (keys.left ? 1 : 0);
     if (dir) {
       p.vx = clamp(p.vx + dir * RUN_ACCEL * dt, -RUN_MAX, RUN_MAX);
@@ -231,13 +266,27 @@
       var f = RUN_FRICTION * dt;
       p.vx = Math.abs(p.vx) <= f ? 0 : p.vx - Math.sign(p.vx) * f;
     }
-    if (keys.jump && p.onGround) { p.vy = -JUMP; p.onGround = false; }
-    p.vy += GRAVITY * dt;
+    if (keys.jump && p.onGround) {
+      p.vy = -JUMP;
+      p.onGround = false;
+    } else if (keys.drop && p.onGround && !p.onFloor) {
+      p.dropBelow = p.y + 1;   // fall through what it stands on
+      p.onGround = false;
+    }
+    var wasOnGround = p.onGround;
+    p.vy = Math.min(FALL_MAX, p.vy + GRAVITY * dt);
     p.x = clamp(p.x + p.vx * dt, 12, W - 12);
+    var prev = p.y;
     p.y += p.vy * dt;
-    var ground = H - 3;
-    if (p.y >= ground) { p.y = ground; p.vy = 0; p.onGround = true; }
-    else p.onGround = false;
+    p.onGround = p.onFloor = false;
+
+    if (p.vy >= 0) {
+      var top = landing(prev, p.y, wasOnGround ? STEP : 0.5);
+      if (top !== null) { p.y = top; p.vy = 0; p.onGround = true; }
+    }
+    if (p.y >= H - 3) { p.y = H - 3; p.vy = 0; p.onGround = p.onFloor = true; }
+    if (p.y < FIGURE_H + 4) { p.y = FIGURE_H + 4; if (p.vy < 0) p.vy = 0; }
+    if (p.onGround) p.dropBelow = -Infinity;
     p.phase += Math.abs(p.vx) * dt * 0.045;
     p.recoil = Math.max(0, p.recoil - dt * 8);
   }
@@ -362,7 +411,7 @@
     if (hintTimer > 0) {
       var hint = coarse
         ? 'tap to shoot'
-        : '←→ / A D run  ·  ↑ / W jump  ·  mouse aims  ·  click / space shoots  ·  Esc quits';
+        : '←→ / A D run  ·  ↑ / W jump  ·  ↓ / S drop  ·  mouse aims  ·  click / space shoots  ·  Esc quits';
       ctx.globalAlpha = clamp(hintTimer, 0, 1);
       ctx.fillStyle = colors.bg;
       ctx.fillRect(hud.x, hud.y + hud.h + 4, ctx.measureText(hint).width + 20, 24);
@@ -403,6 +452,7 @@
     ArrowLeft: 'left', a: 'left', A: 'left',
     ArrowRight: 'right', d: 'right', D: 'right',
     ArrowUp: 'jump', w: 'jump', W: 'jump',
+    ArrowDown: 'drop', s: 'drop', S: 'drop',
     ' ': 'fire'
   };
 
@@ -495,7 +545,12 @@
     ctx = canvas.getContext('2d');
     resize();
 
-    player = { x: coarse ? W / 2 : W * 0.2, y: H - 3, vx: 0, vy: 0, onGround: true, phase: 0, recoil: 0 };
+    solids = Array.prototype.slice.call(document.querySelectorAll(TARGETS));
+    lastScroll = scrollY;
+    player = {
+      x: coarse ? W / 2 : W * 0.2, y: H - 3, vx: 0, vy: 0,
+      onGround: true, onFloor: true, dropBelow: -Infinity, phase: 0, recoil: 0
+    };
     aim = { x: W * 0.75, y: H * 0.4 };
     keys = {};
     firing = false;
@@ -522,6 +577,7 @@
     dead = [];
     bullets = [];
     particles = [];
+    solids = [];
     touchStart = null;
   }
 
