@@ -1,5 +1,5 @@
-/* Site additions on top of zola-quiet. Loaded after the theme stylesheet,
-   so these rules apply to both skins. */
+/* Site additions on top of zola-quiet's terminal (TUI) skin. Loaded
+   after the theme stylesheet. */
 
 .masthead { margin: 0 0 1.5rem; }
 .masthead a {
@@ -11,9 +11,6 @@
 }
 .masthead a:hover { background: transparent; color: var(--accent, var(--fg)); }
 .masthead .prompt { color: var(--accent, currentColor); margin-right: 0.15em; }
-
-/* The typographic skin has no sidebar, so drop the empty one. */
-:root:not([data-skin="tui"]) .sidebar:not(:has(*)) { display: none; }
 
 /* Footer trigger for the easter egg (static/destroy.js). */
 .egg-trigger {

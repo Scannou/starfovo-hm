@@ -60,7 +60,8 @@ Posts with `##` headings get an "on this page" list in the sidebar.
 The theme is used as-is, except for `templates/base.html`, which overrides the
 theme's copy. That override:
 
-- makes the terminal (TUI) skin the default, with a `<noscript>` fallback
+- uses only the terminal (TUI) skin and removes the skin toggle (the
+  light/dark toggle stays)
 - always renders the sidebar, without the ASCII signature box
 - adds the `❯ starfovo.hm` title above the content, styled in `static/site.css`
 - adds the easter egg loader and the ☺ trigger in the footer
