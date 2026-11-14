@@ -1,6 +1,6 @@
 +++
 title = "foobar2000 on macOS: from the bare window to a proper setup"
-date = 2026-11-14
+date = 2026-11-15T00:07:00+01:00
 description = "A beginner's guide to foobar2000 on macOS: the layout editor, installing components, and five that make it feel like home."
 [taxonomies]
 tags = ["foobar2000", "macos", "audio"]

@@ -1,6 +1,6 @@
 +++
 title = "DirectStat: see what fills your Mac's disk"
-date = 2026-11-14
+date = 2026-11-14T16:09:00+01:00
 description = "A free, open-source disk usage viewer for macOS, with a treemap and cleanup suggestions."
 [taxonomies]
 tags = ["directstat", "macos"]

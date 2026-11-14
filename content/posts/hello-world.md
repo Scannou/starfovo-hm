@@ -1,6 +1,6 @@
 +++
 title = "Hello, world"
-date = 2026-11-13
+date = 2026-11-13T13:37:00+01:00
 description = "Why this blog exists and what to expect."
 [taxonomies]
 tags = ["meta"]
