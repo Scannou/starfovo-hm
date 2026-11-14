@@ -5,6 +5,8 @@ Personal tech blog. Static site built with [Zola](https://www.getzola.org/) and 
 
 Live at <https://scannou.github.io/starfovo-hm/>.
 
+&nbsp;
+
 ## Preview
 
 Needs Zola 0.23.6 or newer (`brew install zola`). Run `zola serve` and open
