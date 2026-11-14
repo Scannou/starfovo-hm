@@ -1,7 +1,7 @@
 +++
 title = "foobar2000 on macOS: from the bare window to a proper setup"
 date = 2026-10-31
-updated = 2026-11-07
+updated = 2026-11-14
 description = "A beginner's guide to foobar2000 on macOS: the layout editor, installing components, and five that make it feel like home."
 [taxonomies]
 tags = ["foobar2000", "macos", "audio"]
@@ -83,23 +83,25 @@ All styling is in **Preferences → Display → Waveform Seekbar**:
 - **Style:** Layered, Two-tone (the default), Glow, Heat, Heat map, Rainbow or Solid.
 - **Channels:** Stereo, Mono or Split.
 - **Colours:** theme presets shared with the Spectrum Analyzer (P31/P3/P4/P7 phosphors, Nord, Dracula and more), or your own.
-- **Extras:** shading of the part already played, a hover readout (time, loudness, peak), and red clip markers where a track hits full scale.
+- **Extras:** shading of the part already played, and red clip markers where a track hits full scale.
+
+For the numbers, hover the seekbar, click the cog at the bottom right and choose **Analytics**. You get a readout under the mouse (time, loudness, peak, crest, stereo correlation) and a loudness summary for the whole track.
 
 Each track is analysed once and cached, so it loads instantly the next time.
 
 ## 6. Spectrum Analyzer *(1:04)*
 
-Add `spectrum` right under the seekbar. It reads foobar2000's own FFT stream and shows how loud each frequency is, live.
+Add `spectrum` right under the seekbar. It runs its own FFT on the audio foobar2000 plays and shows how loud each frequency is, live.
 
 The default is **Curve** mode with "line + color bars", where vertical stripes brighten wherever a frequency is louder. Again, everything else is in **Preferences → Display → Spectrum Analyzer**:
 
-- **Draw mode:** Curve or Bars. Bars mode fits as many bars as the panel allows, up to 2048.
+- **Draw mode:** Curve or Bars. Bars mode shows 96 bars by default; set **Bars** to **Auto** to fit as many as the panel allows, up to 2048.
 - **Frequency scale:** logarithmic, compact-bass logarithmic or linear.
 - **Theme:** 14 presets, the same ones the seekbar uses. Pick P31 green in both and they match, like in the video.
 
 Two handy tricks inside the panel itself:
 
-- **Click and hold** to read the exact frequency under the cursor.
+- **Hover** to read the frequency, the nearest note and the level under the cursor.
 - **Double-click** to go full-screen.
 
 ## 7. Queue Manager *(1:20)*
@@ -119,8 +121,8 @@ splitter vertical style=thin
 How to use it:
 
 - **Add tracks** by selecting them in SimPlaylist and pressing **Q**, or with right-click → **Playback → Add to playback queue**.
-- **Drag** within the queue to reorder.
-- **Enter** plays a track; **Delete** removes it.
+- **Drag** tracks in from SimPlaylist, or within the queue to reorder.
+- **Enter** or a double-click plays a track; **Delete** removes it.
 - The queue **comes back after a restart** (you can turn that off in **Preferences → Display → Queue Manager**).
 - **Stop After Queue** stops playback once the queue runs out. It's in the Playback menu, the queue's right-click menu and Preferences.
 
