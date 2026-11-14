@@ -1,6 +1,6 @@
 # Live URL. The deploy workflow overrides it with whatever GitHub Pages reports.
 base_url = "https://scannou.github.io/starfovo-hm"
-title = "starfovo.hm"
+title = "starfovo"
 description = "Notes on tech."
 default_language = "en"
 theme = "zola-quiet"

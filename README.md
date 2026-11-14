@@ -1,4 +1,4 @@
-# starfovo.hm
+# starfovo
 
 Personal tech blog. Static site built with [Zola](https://www.getzola.org/) and the
 [zola-quiet](https://github.com/johnnybravo-xyz/zola-quiet) theme.
@@ -63,7 +63,7 @@ theme's copy. That override:
 - uses only the terminal (TUI) skin and removes the skin toggle (the
   light/dark toggle stays)
 - always renders the sidebar, without the ASCII signature box
-- adds the `❯ starfovo.hm` title above the content, styled in `static/site.css`
+- adds the `❯ starfovo` title above the content, styled in `static/site.css`
 - adds the easter egg loader and the ☺ trigger in the footer
 
 Because of the override, changes to the theme's own `base.html` don't apply
