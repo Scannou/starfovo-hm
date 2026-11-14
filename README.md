@@ -50,6 +50,7 @@ Posts with `##` headings get an "on this page" list in the sidebar.
 | `config.toml` | Site title, URL, author, feed and highlighting settings |
 | `content/` | Home intro (`_index.md`), about page, and posts |
 | `templates/base.html` | Copy of the theme's base template with site changes (see below) |
+| `templates/index.html` | Copy of the theme's home page template with a SoundCloud link |
 | `static/site.css` | Site styles loaded after the theme's stylesheet |
 | `static/destroy.js` | Easter egg, loaded only when triggered (see below) |
 | `themes/zola-quiet/` | The theme, as a git submodule |
@@ -57,8 +58,9 @@ Posts with `##` headings get an "on this page" list in the sidebar.
 
 ## Theme changes
 
-The theme is used as-is, except for `templates/base.html`, which overrides the
-theme's copy. That override:
+The theme is used as-is, except for `templates/base.html` and
+`templates/index.html`, which override the theme's copies. The `base.html`
+override:
 
 - uses only the terminal (TUI) skin and removes the skin toggle (the
   light/dark toggle stays)
@@ -66,17 +68,21 @@ theme's copy. That override:
 - adds the `❯ starfovo` title above the content, styled in `static/site.css`
 - adds the easter egg loader and the ☺ trigger in the footer
 
-Because of the override, changes to the theme's own `base.html` don't apply
-automatically. The file's header comment names the theme commit it was copied
-from.
+The `index.html` override adds a SoundCloud link (`soundcloud` in
+`config.toml`'s `[extra]`) to the home page's connect section.
+
+Because of the overrides, changes to the theme's own copies of these files
+don't apply automatically. Each file's header comment names the theme commit
+it was copied from.
 
 To update the theme:
 
 ```sh
 git -C themes/zola-quiet pull origin main
 diff themes/zola-quiet/templates/base.html templates/base.html   # port any changes
+diff themes/zola-quiet/templates/index.html templates/index.html
 zola serve                                                       # check it
-git add themes/zola-quiet templates/base.html
+git add themes/zola-quiet templates/base.html templates/index.html
 ```
 
 ## Easter egg
