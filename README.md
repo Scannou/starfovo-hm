@@ -5,19 +5,11 @@ Personal tech blog. Static site built with [Zola](https://www.getzola.org/) and 
 
 Live at <https://scannou.github.io/starfovo-hm/>.
 
-## Run it locally
+## Preview
 
-Needs Zola 0.23.6 or newer (`brew install zola`).
-
-```sh
-git clone --recurse-submodules git@github.com:Scannou/starfovo-hm.git
-cd starfovo-hm
-zola serve
-```
-
-Open <http://127.0.0.1:1111>. Pages reload as you edit.
-
-Already cloned without the theme? Run `git submodule update --init`.
+Needs Zola 0.23.6 or newer (`brew install zola`). Run `zola serve` and open
+<http://127.0.0.1:1111>; pages reload as you edit. In a fresh clone, run
+`git submodule update --init` first to fetch the theme.
 
 ## Write a post
 
