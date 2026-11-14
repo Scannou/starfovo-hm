@@ -66,6 +66,7 @@ override:
   light/dark toggle stays)
 - always renders the sidebar, without the ASCII signature box
 - adds the `❯ starfovo` title above the content, styled in `static/site.css`
+- adds a SoundCloud icon to the footer icons
 - adds the easter egg loader and the ☺ trigger in the footer
 
 The `index.html` override adds a SoundCloud link (`soundcloud` in
