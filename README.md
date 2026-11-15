@@ -41,7 +41,7 @@ Posts with `##` headings get an "on this page" list in the sidebar.
 
 | Path | What it is |
 |---|---|
-| `config.toml` | Site title, URL, author, feed and highlighting settings |
+| `config.toml` | Site title, URL, author, profile links, visitor counter, feed and highlighting settings |
 | `content/` | Home intro (`_index.md`), about page, and posts |
 | `templates/base.html` | Copy of the theme's base template with site changes (see below) |
 | `templates/index.html` | Copy of the theme's home page template with SoundCloud and Last.fm links |
@@ -61,6 +61,9 @@ override:
 - always renders the sidebar, without the ASCII signature box
 - adds the `❯ starfovo` title above the content, styled in `static/site.css`
 - adds SoundCloud and Last.fm icons to the footer icons
+- loads the [GoatCounter](https://www.goatcounter.com/) visitor counter script
+  from `gc.zgo.at`, as hosted GoatCounter needs (`goatcounter_domain` in
+  `config.toml`'s `[extra]` turns the counter on)
 - adds the easter egg loader and the ☺ trigger in the footer
 
 The `index.html` override adds SoundCloud and Last.fm links (`soundcloud`

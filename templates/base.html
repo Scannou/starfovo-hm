@@ -3,7 +3,8 @@
     the terminal (TUI) skin, loaded directly, with no skin toggle; the
     sidebar always renders (no ASCII box); a masthead with the site title
     sits above the content (site.css); SoundCloud and Last.fm icons in the
-    footer; and an easter egg loader plus its footer trigger (static/destroy.js). -#}
+    footer; the GoatCounter script loads from gc.zgo.at (hosted GoatCounter);
+    and an easter egg loader plus its footer trigger (static/destroy.js). -#}
 <html lang="{{ config.default_language }}" data-skin="tui">
 <head>
 <meta charset="utf-8">
@@ -38,11 +39,12 @@
 <link rel="stylesheet" id="syntax-light" href="{{ get_url(path='giallo-light.css') }}" media="(prefers-color-scheme: light)">
 <link rel="stylesheet" id="syntax-dark" href="{{ get_url(path='giallo-dark.css') }}" media="(prefers-color-scheme: dark)">
 {# Optional analytics — fires only if config.extra.goatcounter_domain
-   is set in the site's config.toml. Keeps the theme provider-neutral
-   and self-hosted-only by default. #}
+   is set in the site's config.toml. The script comes from gc.zgo.at
+   because hosted GoatCounter doesn't serve count.js on the site's own
+   goatcounter.com address. #}
 {% if config.extra.goatcounter_domain %}
 <script data-goatcounter="https://{{ config.extra.goatcounter_domain }}/count"
-        async src="https://{{ config.extra.goatcounter_domain }}/count.js"></script>
+        async src="https://gc.zgo.at/count.js"></script>
 {% endif %}
 </head>
 <body>
