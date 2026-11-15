@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{#- Copy of zola-quiet's index.html (theme commit 54c7f29). Changes: a
-    SoundCloud link in the connect section. -#}
+{#- Copy of zola-quiet's index.html (theme commit 54c7f29). Changes:
+    SoundCloud and Last.fm links in the connect section. -#}
 {% block content %}
 {{ section.content | safe }}
 
@@ -26,11 +26,12 @@
 {% endif %}
 {% endif %}
 
-{% if config.extra.github or config.extra.soundcloud or config.extra.linkedin or config.extra.email %}
+{% if config.extra.github or config.extra.soundcloud or config.extra.lastfm or config.extra.linkedin or config.extra.email %}
 <h2>&gt; connect</h2>
 <ul class="connect">
 {% if config.extra.github %}<li><strong>github</strong> · <a href="https://github.com/{{ config.extra.github }}" rel="me">{{ config.extra.github }}</a></li>{% endif %}
 {% if config.extra.soundcloud %}<li><strong>soundcloud</strong> · <a href="https://soundcloud.com/{{ config.extra.soundcloud | lower }}" rel="me">{{ config.extra.soundcloud }}</a></li>{% endif %}
+{% if config.extra.lastfm %}<li><strong>last.fm</strong> · <a href="https://www.last.fm/user/{{ config.extra.lastfm }}" rel="me">{{ config.extra.lastfm }}</a></li>{% endif %}
 {% if config.extra.linkedin %}<li><strong>linkedin</strong> · <a href="https://www.linkedin.com/in/{{ config.extra.linkedin }}" rel="me">{{ config.extra.linkedin }}</a></li>{% endif %}
 {% if config.extra.email %}<li><strong>email</strong> · <a href="mailto:{{ config.extra.email }}">{{ config.extra.email }}</a></li>{% endif %}
 </ul>

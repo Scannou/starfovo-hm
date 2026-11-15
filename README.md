@@ -44,7 +44,7 @@ Posts with `##` headings get an "on this page" list in the sidebar.
 | `config.toml` | Site title, URL, author, feed and highlighting settings |
 | `content/` | Home intro (`_index.md`), about page, and posts |
 | `templates/base.html` | Copy of the theme's base template with site changes (see below) |
-| `templates/index.html` | Copy of the theme's home page template with a SoundCloud link |
+| `templates/index.html` | Copy of the theme's home page template with SoundCloud and Last.fm links |
 | `static/site.css` | Site styles loaded after the theme's stylesheet |
 | `static/destroy.js` | Easter egg, loaded only when triggered (see below) |
 | `themes/zola-quiet/` | The theme, as a git submodule |
@@ -60,11 +60,11 @@ override:
   light/dark toggle stays)
 - always renders the sidebar, without the ASCII signature box
 - adds the `❯ starfovo` title above the content, styled in `static/site.css`
-- adds a SoundCloud icon to the footer icons
+- adds SoundCloud and Last.fm icons to the footer icons
 - adds the easter egg loader and the ☺ trigger in the footer
 
-The `index.html` override adds a SoundCloud link (`soundcloud` in
-`config.toml`'s `[extra]`) to the home page's connect section.
+The `index.html` override adds SoundCloud and Last.fm links (`soundcloud`
+and `lastfm` in `config.toml`'s `[extra]`) to the home page's connect section.
 
 Because of the overrides, changes to the theme's own copies of these files
 don't apply automatically. Each file's header comment names the theme commit
