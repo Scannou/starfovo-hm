@@ -139,6 +139,14 @@
   }
 
   function burstImage(el, src, sw0, sh0, r, bx, by, dx, dy) {
+    // Copy the picture once at its on-screen size: drawing pieces straight
+    // from a <video> (or a large image) every frame is slow, in Firefox
+    // down to a few fps.
+    var snap = document.createElement('canvas');
+    snap.width = Math.max(1, Math.round(r.width * dpr));
+    snap.height = Math.max(1, Math.round(r.height * dpr));
+    try { snap.getContext('2d').drawImage(src, 0, 0, sw0, sh0, 0, 0, snap.width, snap.height); } catch (e) {}
+    src = snap; sw0 = snap.width; sh0 = snap.height;
     var cols = clamp(Math.round(r.width / 60), 3, 12);
     var rows = clamp(Math.round(r.height / 60), 2, 10);
     var w = r.width / cols, h = r.height / rows;
