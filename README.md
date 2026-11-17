@@ -61,6 +61,8 @@ override:
 - always renders the sidebar, without the ASCII signature box
 - adds the `❯ starfovo` title above the content, styled in `static/site.css`
 - adds SoundCloud and Last.fm icons to the footer icons
+- adds a lightbox: clicking an image in a post opens it at its real size,
+  shrunk only to fit the window (styles in `static/site.css`)
 - loads the [GoatCounter](https://www.goatcounter.com/) visitor counter script
   from `gc.zgo.at`, as hosted GoatCounter needs (`goatcounter_domain` in
   `config.toml`'s `[extra]` turns the counter on)

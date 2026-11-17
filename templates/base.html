@@ -4,7 +4,8 @@
     sidebar always renders (no ASCII box); a masthead with the site title
     sits above the content (site.css); SoundCloud and Last.fm icons in the
     footer; the GoatCounter script loads from gc.zgo.at (hosted GoatCounter);
-    and an easter egg loader plus its footer trigger (static/destroy.js). -#}
+    a lightbox for post images (site.css); and an easter egg loader plus its
+    footer trigger (static/destroy.js). -#}
 <html lang="{{ config.default_language }}" data-skin="tui">
 <head>
 <meta charset="utf-8">
@@ -164,6 +165,53 @@ syncSyntaxTheme();
       ticking = true;
     }
   }, { passive: true });
+})();
+
+/* Lightbox: click an image in a post to open it at its real size, scaled
+   down only to fit the window. Click again or press Esc to close. Images
+   inside links keep going to the link. */
+(function(){
+  var imgs = document.querySelectorAll('article img');
+  if (!imgs.length) return;
+  var box = document.createElement('div');
+  box.className = 'lightbox';
+  box.hidden = true;
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  var big = document.createElement('img');
+  box.appendChild(big);
+  document.body.appendChild(box);
+  var opener = null;
+  function open(img){
+    opener = img;
+    big.src = img.currentSrc || img.src;
+    big.alt = img.alt;
+    box.setAttribute('aria-label', img.alt || 'Image');
+    box.hidden = false;
+    document.documentElement.classList.add('lightbox-open');
+    box.tabIndex = -1;
+    box.focus();
+  }
+  function close(){
+    if (box.hidden) return;
+    box.hidden = true;
+    document.documentElement.classList.remove('lightbox-open');
+    if (opener) opener.focus();
+  }
+  imgs.forEach(function(img){
+    if (img.closest('a')) return;
+    img.classList.add('zoomable');
+    img.tabIndex = 0;
+    img.setAttribute('role', 'button');
+    img.addEventListener('click', function(){ open(img); });
+    img.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(img); }
+    });
+  });
+  box.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') close();
+  });
 })();
 
 /* Easter egg: typing "boom" or clicking the ☺ in the footer loads
