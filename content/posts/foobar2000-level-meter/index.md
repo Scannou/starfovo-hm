@@ -2,7 +2,6 @@
 title = "Level Meter for foobar2000 on macOS"
 date = 2026-11-17T11:30:00+01:00
 description = "A new foobar2000 macOS component: peak, RMS and LUFS loudness in one panel, with an optional analog VU look."
-draft = true
 [taxonomies]
 tags = ["foobar2000", "macos", "audio"]
 +++
